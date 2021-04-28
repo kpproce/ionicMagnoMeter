@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Plugins } from  '@capacitor/core';
 import { Magnetometer, MagnetometerReading } from '@ionic-native/Magnetometer/ngx';
-// import { Dialogs } from '@ionic-native/dialogs/ngx';
 
 // https://ionicframework.com/docs/native/magnetometer
 
@@ -17,25 +16,25 @@ export class HomePage {
 
   testVar = 'test empty'; //  test to see if it works in emulator android
 
-  constructor(private magnetometer: Magnetometer) {}
+  constructor(private magnetometer: Magnetometer) {} // this seems to be the probem, empty object
 
 
-async getCurrent2() {
+async getCurrent2() { // not working..
   const magnetoMeter2 = await Plugins.Magnetometer.get();
   if (Object.keys(magnetoMeter2).length === 0) {
-    this.testVar = 'magnetoMeter via plugins ook leeg';
+    this.testVar = 'magnetoMeter via plugins empty';
   } else {
-    this.testVar = 'magnetoMeter via plugins NIET leeg';
+    this.testVar = 'magnetoMeter via plugins not empty';
   }
 }
 
-getCurrent(){
+getCurrent(){ // not working because of empty object magnetometer
     // Get the device current compass heading
-  this.testVar = 'get Current aangeroepen 1a';
+  this.testVar = 'get Current called';
   if ( this.magnetometer) { // bestaat het object?
-    this.testVar = 'GET current: object magnetometer exsist';
+    this.testVar += ': object magnetometer exists';
   } else {
-    this.testVar = 'GET current: magnetometer does NOT exists';
+    this.testVar += ': magnetometer does NOT exists';
   }
 
   this.magnetometer.getReading().then(
