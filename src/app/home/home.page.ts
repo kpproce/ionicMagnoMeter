@@ -4,7 +4,7 @@ import { Magnetometer, MagnetometerReading } from '@ionic-native/Magnetometer/ng
 // import { Dialogs } from '@ionic-native/dialogs/ngx';
 
 // https://ionicframework.com/docs/native/magnetometer
-// https://ionicframework.com/docs/native/dialogs
+
 
 @Component({
   selector: 'app-home',
@@ -13,21 +13,12 @@ import { Magnetometer, MagnetometerReading } from '@ionic-native/Magnetometer/ng
 })
 
 export class HomePage {
-  // magnetometer: Magnetometer; // alternatief op de constructor, maar object blijft helaas wel leeg.
-  // dialogs: Dialogs;
+  // magnetometer: Magnetometer; // alternative to construct?
 
-  testVar = 'test leeg'; // voor testen om te zien wat wel werkt ook in android
-
-  // *** volgens de documentatie moet de magnetometer in de constructor staan als parameter, maar dat werkt niet
-
-  // constructor() {};  //
+  testVar = 'test empty'; //  test to see if it works in emulator android
 
   constructor(private magnetometer: Magnetometer) {}
 
-  // ZO MOET het volgens de documentatie, maar object blijft leeg en in de browser krijg je direct NullInjectorError
-  // constructor(private dialogs: Dialogs) {}
-
-// Uit de testjes hieronder blijkt dat de magnetometer niet bestaat als object
 
 async getCurrent2() {
   const magnetoMeter2 = await Plugins.Magnetometer.get();
@@ -42,26 +33,26 @@ getCurrent(){
     // Get the device current compass heading
   this.testVar = 'get Current aangeroepen 1a';
   if ( this.magnetometer) { // bestaat het object?
-    this.testVar = 'get Current aangeroepen 1b, object magnetometer bestaat';
+    this.testVar = 'GET current: object magnetometer exsist';
   } else {
-    this.testVar = 'get Current aangeroepen magnetometer does not exists';
+    this.testVar = 'GET current: magnetometer does NOT exists';
   }
 
   this.magnetometer.getReading().then(
-      (data: MagnetometerReading) => console.log(data), // dit stuk levert niets op
-      (error: any) => console.log(error) // console leeg
+      (data: MagnetometerReading) => console.log(data), // not working
+      (error: any) => console.log(error) // console shows no error
 
-     // Error die dit oplevert: core.js:6210 ERROR TypeError: Cannot read property 'getReading' of undefined
+     // Error: core.js:6210 ERROR TypeError: Cannot read property 'getReading' of undefined
 
     );
     this.testVar = 'get Current aangeroepen 2';
   }
 
-  changeTestText() { // kijken of de varibele en de knoppen werken
-    if (this.testVar==='test tekst 2' ) {
-      this.testVar = 'test tekst 1';
+  changeTestText() { // to test if rest is working at all proper
+    if (this.testVar==='test text 2' ) {
+      this.testVar = 'test text 1';
     } else {
-      this.testVar = 'test tekst 2';
+      this.testVar = 'test text 2';
     }
   }
 }
